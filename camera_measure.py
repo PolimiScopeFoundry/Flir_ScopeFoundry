@@ -37,7 +37,6 @@ class FlirMeasure(Measurement):
         self.settings.New('level_min', dtype=int, initial=60)
         self.settings.New('level_max', dtype=int, initial=4000)
         
-        
         self.image_gen = self.app.hardware['FLIRhw']
         
     def setup_figure(self):
