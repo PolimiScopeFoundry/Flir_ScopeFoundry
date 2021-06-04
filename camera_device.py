@@ -30,14 +30,12 @@ class FlirDevice(object):
             self.cam.EventNotification = 'Off'
             self.cam.GammaEnabled = False
             self.cam.PixelFormat = 'Mono16' # specify here the bit depth
-            self.cam.BlackLevel = 1.0 # do not change
+            self.cam.BlackLevel = 1.0 # 
             self.cam.TriggerMode = 'Off'
-            
             self.cam.OnBoardColorProcessEnabled = False
             
     def set_acquisitionmode(self,mode):
         self.cam.AcquisitionMode = mode
-        #print('set mode to', mode)
         
     def get_acquisitionmode(self):
         mode = self.cam.AcquisitionMode
@@ -113,32 +111,15 @@ class FlirDevice(object):
         
 if __name__ == '__main__':
     
-    import time
-    
     try:    
-        camera = FlirDevice(debug=False)
-        # camera.set_acquisitionmode('MultiFrame')
+        camera = FlirDevice()
+        
         camera.set_acquisitionmode('Continuous')
-        
-        camera.set_rate(20)
-        Nframe = 10
-        # camera.cam.AcquisitionFrameCount = Nframe 
-        t0 = time.time()
-        camera.acq_stop()
         camera.acq_start()
+        im = camera.get_nparray()
+        camera.acq_stop() 
         
-        print('rate:',
-              camera.cam.get_info('AcquisitionFrameRate'))
-    
-        print('exposure time:',
-              camera.cam.get_info('ExposureTime'))
-        
-        for idx in range(Nframe):
-            f = camera.get_nparray()
-            
-        camera.acq_stop()
-        print('Elapsed time:', time.time()-t0)
-        
+        print("Acquired image shape:", im.shape)
         
     except Exception as err:
         print(err)

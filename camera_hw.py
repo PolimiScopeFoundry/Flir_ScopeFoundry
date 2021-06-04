@@ -11,19 +11,30 @@ class FlirHW(HardwareComponent):
     name = 'FLIRhw'
     
     def setup(self):
-        self.infos = self.add_logged_quantity('name', dtype=str)     
-        self.temperature = self.add_logged_quantity('temperature', dtype=float, ro=True,unit=chr(176)+'C')  
-        self.image_width = self.add_logged_quantity('image_width', dtype=int, ro=True,unit='px')
-        self.image_height = self.add_logged_quantity('image_height', dtype=int, ro=True,unit='px')
-        self.gain = self.settings.New(name='gain', initial=0., dtype=float, vmax = 1000., vmin = 0., spinbox_step = 1., ro=False, unit='dB', reread_from_hardware_after_write=True)
-        self.frame_rate = self.settings.New(name='frame_rate', initial= 20, vmax = 1000., vmin = 0.01, spinbox_step = 0.1, unit = 'fps',dtype=float, ro=False, reread_from_hardware_after_write=True)
-        self.frame_num = self.settings.New(name='frame_num',initial= 63, spinbox_step = 1, dtype=int, ro=False)
-        self.exposure_time = self.settings.New(name='exposure_time', initial=100, vmax =5000., vmin = 0.01, spinbox_step = 0.1,dtype=float, ro=False, unit='ms',reread_from_hardware_after_write=True)
-        self.acquisition_mode = self.settings.New(name='acquisition_mode', dtype=str, choices=['Continuous', 'MultiFrame'], initial = 'Continuous', ro=False)
+        # create Settings (aka logged quantities)
+        # self.infos = self.add_logged_quantity('name', dtype=str)     
+        self.infos = self.settings.New(name='name', dtype=str)
+        self.temperature = self.settings.New(name='temperature', dtype=float, ro=True, unit=chr(176)+'C' )
+        self.image_width = self.settings.New(name='image_width', dtype=int, ro=True,unit='px')
+        self.image_height = self.settings.New(name='image_height', dtype=int, ro=True,unit='px')
+        self.gain = self.settings.New(name='gain', initial=0., dtype=float,
+                                      vmax = 1000., vmin = 0., spinbox_step = 1.,
+                                      ro=False, unit='dB', reread_from_hardware_after_write=True)
+        self.frame_rate = self.settings.New(name='frame_rate', initial= 9,
+                                            vmax = 1000., vmin = 0.01, spinbox_step = 0.1,
+                                            unit = 'fps',dtype=float, ro=False, reread_from_hardware_after_write=True)
+        self.frame_num = self.settings.New(name='frame_num',initial= 63, spinbox_step = 1,
+                                           dtype=int, ro=False)
+        self.exposure_time = self.settings.New(name='exposure_time', initial=100, vmax =5000.,
+                                               vmin = 0.01, spinbox_step = 0.1,dtype=float, ro=False, unit='ms',reread_from_hardware_after_write=True)
+        self.acquisition_mode = self.settings.New(name='acquisition_mode', dtype=str,
+                                                  choices=['Continuous', 'MultiFrame'], initial = 'Continuous', ro=False)
         
     def connect(self):
+        # create an instance of the Device
         self.camera = FlirDevice(debug=self.debug_mode.val)      
-        # connect logged quantities        
+        
+        # connect settings to Device methods
         self.temperature.hardware_read_func = self.camera.read_temperature
         self.image_width.hardware_read_func = self.camera.get_width
         self.image_height.hardware_read_func = self.camera.get_height

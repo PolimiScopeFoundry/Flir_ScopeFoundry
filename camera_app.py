@@ -5,8 +5,6 @@ Created on Tue Nov 17 12:33:32 2020
 @authors: Alberto Ghezzi, Andrea Bassi. Politecnico di Milano
 """
 from ScopeFoundry import BaseMicroscopeApp
-# import logging
-# logging.basicConfig(level=logging.INFO)
 
 class camera_app(BaseMicroscopeApp):
     
@@ -17,7 +15,6 @@ class camera_app(BaseMicroscopeApp):
         
         #Add hardware components
         print("Adding Hardware Components")
-        #parametri del dispositivo che si vuole controllare tramite interfaccia
         from camera_hw import FlirHW
         self.add_hardware(FlirHW(self))
            

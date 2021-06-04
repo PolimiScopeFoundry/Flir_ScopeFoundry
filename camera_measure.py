@@ -24,7 +24,8 @@ class FlirMeasure(Measurement):
         """
         
         self.ui_filename = sibling_path(__file__, "camera.ui")
-        self.ui = load_qt_ui_file(self.ui_filename)    
+        self.ui = load_qt_ui_file(self.ui_filename) 
+        
         self.settings.New('save_h5', dtype=bool, initial=False)         
         self.settings.New('refresh_period',dtype = float, unit ='s', spinbox_decimals = 3, initial = 0.05, vmin = 0)        
         
@@ -37,7 +38,7 @@ class FlirMeasure(Measurement):
         self.settings.New('level_min', dtype=int, initial=60)
         self.settings.New('level_max', dtype=int, initial=4000)
         
-        self.image_gen = self.app.hardware['FLIRhw']
+        self.image_gen = self.app.hardware['FLIRhw'] 
         
     def setup_figure(self):
         """
@@ -55,10 +56,9 @@ class FlirMeasure(Measurement):
         self.settings.level_min.connect_to_widget(self.ui.min_doubleSpinBox) 
         self.settings.level_max.connect_to_widget(self.ui.max_doubleSpinBox) 
                 
-                
         # Set up pyqtgraph graph_layout in the UI
         self.imv = pg.ImageView()
-        self.ui.image_groupBox.layout().addWidget(self.imv)
+        self.ui.imageLayout.addWidget(self.imv)
         colors = [(0, 0, 0),
                   (45, 5, 61),
                   (84, 42, 55),
@@ -78,8 +78,9 @@ class FlirMeasure(Measurement):
         self.display_update_period = self.settings['refresh_period'] 
        
         length = self.image_gen.frame_num.val
-                
-        self.settings['progress'] = self.frame_index * 100/length
+        self.settings['progress'] = (self.frame_index +1) * 100/length
+        
+        
         
         if hasattr(self, 'img'):
             self.imv.setImage(self.img.T,

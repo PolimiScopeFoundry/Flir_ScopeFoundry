@@ -1,0 +1,92 @@
+2021-05-06T16:20:03|ERROR|tornado.general|Uncaught exception in ZMQStream callback
+Traceback (most recent call last):
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 444, in _run_callback
+    callback(*args, **kwargs)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 95, in _handle_recv
+    self._inspect(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 245, in _check_kernel_info_reply
+    self._handle_kernel_info_reply(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\client.py", line 404, in _handle_kernel_info_reply
+    adapt_version = int(msg['content']['protocol_version'].split('.')[0])
+KeyError: 'protocol_version'
+2021-05-06T16:20:03|ERROR|tornado.general|Uncaught exception in zmqstream callback
+Traceback (most recent call last):
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 462, in _handle_events
+    self._handle_recv()
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 492, in _handle_recv
+    self._run_callback(callback, msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 444, in _run_callback
+    callback(*args, **kwargs)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 95, in _handle_recv
+    self._inspect(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 245, in _check_kernel_info_reply
+    self._handle_kernel_info_reply(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\client.py", line 404, in _handle_kernel_info_reply
+    adapt_version = int(msg['content']['protocol_version'].split('.')[0])
+KeyError: 'protocol_version'
+2021-05-06T16:20:03|ERROR|asyncio|Exception in callback BaseAsyncIOLoop._handle_events(3544, 1)
+handle: <Handle BaseAsyncIOLoop._handle_events(3544, 1)>
+Traceback (most recent call last):
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\asyncio\events.py", line 81, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\tornado\platform\asyncio.py", line 139, in _handle_events
+    handler_func(fileobj, events)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 462, in _handle_events
+    self._handle_recv()
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 492, in _handle_recv
+    self._run_callback(callback, msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 444, in _run_callback
+    callback(*args, **kwargs)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 95, in _handle_recv
+    self._inspect(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 245, in _check_kernel_info_reply
+    self._handle_kernel_info_reply(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\client.py", line 404, in _handle_kernel_info_reply
+    adapt_version = int(msg['content']['protocol_version'].split('.')[0])
+KeyError: 'protocol_version'
+2021-05-06T16:20:25|ERROR|tornado.general|Uncaught exception in ZMQStream callback
+Traceback (most recent call last):
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 444, in _run_callback
+    callback(*args, **kwargs)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 95, in _handle_recv
+    self._inspect(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 245, in _check_kernel_info_reply
+    self._handle_kernel_info_reply(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\client.py", line 404, in _handle_kernel_info_reply
+    adapt_version = int(msg['content']['protocol_version'].split('.')[0])
+KeyError: 'protocol_version'
+2021-05-06T16:20:25|ERROR|tornado.general|Uncaught exception in zmqstream callback
+Traceback (most recent call last):
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 462, in _handle_events
+    self._handle_recv()
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 492, in _handle_recv
+    self._run_callback(callback, msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 444, in _run_callback
+    callback(*args, **kwargs)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 95, in _handle_recv
+    self._inspect(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 245, in _check_kernel_info_reply
+    self._handle_kernel_info_reply(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\client.py", line 404, in _handle_kernel_info_reply
+    adapt_version = int(msg['content']['protocol_version'].split('.')[0])
+KeyError: 'protocol_version'
+2021-05-06T16:20:25|ERROR|asyncio|Exception in callback BaseAsyncIOLoop._handle_events(3764, 1)
+handle: <Handle BaseAsyncIOLoop._handle_events(3764, 1)>
+Traceback (most recent call last):
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\asyncio\events.py", line 81, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\tornado\platform\asyncio.py", line 139, in _handle_events
+    handler_func(fileobj, events)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 462, in _handle_events
+    self._handle_recv()
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 492, in _handle_recv
+    self._run_callback(callback, msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\zmq\eventloop\zmqstream.py", line 444, in _run_callback
+    callback(*args, **kwargs)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 95, in _handle_recv
+    self._inspect(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\threaded.py", line 245, in _check_kernel_info_reply
+    self._handle_kernel_info_reply(msg)
+  File "C:\Users\LAB\Anaconda3\envs\scopefoundry\lib\site-packages\jupyter_client\client.py", line 404, in _handle_kernel_info_reply
+    adapt_version = int(msg['content']['protocol_version'].split('.')[0])
+KeyError: 'protocol_version'
