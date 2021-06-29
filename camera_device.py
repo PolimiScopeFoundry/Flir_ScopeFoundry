@@ -79,7 +79,6 @@ class FlirDevice(object):
         minexp = self.cam.get_info('ExposureTime')['min']
         exptime = min(maxexp, max(desired_time*1000, minexp))
         self.cam.ExposureTime = exptime
-        # print('set exposure to: ', exptime/1000 )
     
     def get_rate(self):
         return self.cam.AcquisitionFrameRate
@@ -95,7 +94,6 @@ class FlirDevice(object):
         minfr = self.cam.get_info('AcquisitionFrameRate')['min']
         framerate = max(minfr, min(desired_framerate, maxfr))
         self.cam.AcquisitionFrameRate = framerate
-        # print('set rate to: ', framerate )
     
     def get_gain(self):
         return self.cam.Gain    
@@ -113,7 +111,6 @@ if __name__ == '__main__':
     
     try:    
         camera = FlirDevice()
-        
         camera.set_acquisitionmode('Continuous')
         camera.acq_start()
         im = camera.get_nparray()

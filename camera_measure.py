@@ -29,14 +29,15 @@ class FlirMeasure(Measurement):
         self.settings.New('save_h5', dtype=bool, initial=False)         
         self.settings.New('refresh_period',dtype = float, unit ='s', spinbox_decimals = 3, initial = 0.05, vmin = 0)        
         
-        self.settings.New('xsampling', dtype=float, unit='um', initial=0.0586) 
-        self.settings.New('ysampling', dtype=float, unit='um', initial=0.0586)
+        self.settings.New('xsampling', dtype=float, unit='um', initial=0.0586, spinbox_decimals = 3) 
+        self.settings.New('ysampling', dtype=float, unit='um', initial=0.0586, spinbox_decimals = 3)
         self.settings.New('zsampling', dtype=float, unit='um', initial=1.0)
         
         self.auto_range = self.settings.New('auto_range', dtype=bool, initial=True)
         self.settings.New('auto_levels', dtype=bool, initial=True)
         self.settings.New('level_min', dtype=int, initial=60)
         self.settings.New('level_max', dtype=int, initial=4000)
+        
         
         self.image_gen = self.app.hardware['FLIRhw'] 
         
@@ -52,7 +53,7 @@ class FlirMeasure(Measurement):
         self.ui.interrupt_pushButton.clicked.connect(self.interrupt)
         self.settings.save_h5.connect_to_widget(self.ui.save_h5_checkBox)
         self.settings.auto_levels.connect_to_widget(self.ui.autoLevels_checkbox)
-        self.auto_range.connect_to_widget(self.ui.autoRange_checkbox)
+        self.settings.auto_range.connect_to_widget(self.ui.autoRange_checkbox)
         self.settings.level_min.connect_to_widget(self.ui.min_doubleSpinBox) 
         self.settings.level_max.connect_to_widget(self.ui.max_doubleSpinBox) 
                 
@@ -78,6 +79,7 @@ class FlirMeasure(Measurement):
         self.display_update_period = self.settings['refresh_period'] 
        
         length = self.image_gen.frame_num.val
+        
         self.settings['progress'] = (self.frame_index +1) * 100/length
         
         
@@ -110,6 +112,8 @@ class FlirMeasure(Measurement):
             self.frame_index = 0
             
             if self.image_gen.settings['acquisition_mode'] == 'Continuous':
+            # if self.image_gen.settings.acquisition_mode.val ==' Continuos':    
+            
                 """
                 If mode is Continuos, acquire frames indefinitely. No save in h5 is permormed 
                 """
