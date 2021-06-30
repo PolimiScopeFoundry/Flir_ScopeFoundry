@@ -27,7 +27,7 @@ class FlirMeasure(Measurement):
         self.ui = load_qt_ui_file(self.ui_filename) 
         
         self.settings.New('save_h5', dtype=bool, initial=False)         
-        self.settings.New('refresh_period',dtype = float, unit ='s', spinbox_decimals = 3, initial = 0.05, vmin = 0)        
+        self.settings.New('refresh_period', dtype = float, unit ='s', spinbox_decimals = 3, initial = 0.05, vmin = 0)        
         
         self.settings.New('xsampling', dtype=float, unit='um', initial=0.0586, spinbox_decimals = 3) 
         self.settings.New('ysampling', dtype=float, unit='um', initial=0.0586, spinbox_decimals = 3)

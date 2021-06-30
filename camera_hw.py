@@ -23,7 +23,7 @@ class FlirHW(HardwareComponent):
         self.frame_rate = self.settings.New(name='frame_rate', initial= 9,
                                             vmax = 1000., vmin = 0.01, spinbox_step = 0.1,
                                             unit = 'fps',dtype=float, ro=False, reread_from_hardware_after_write=True)
-        self.frame_num = self.settings.New(name='frame_num',initial= 63, spinbox_step = 1,
+        self.frame_num = self.settings.New(name='frame_num',initial= 10, spinbox_step = 1,
                                            dtype=int, ro=False)
         self.exposure_time = self.settings.New(name='exposure_time', initial=100, vmax =5000.,
                                                vmin = 0.01, spinbox_step = 0.1,dtype=float, ro=False, unit='ms',reread_from_hardware_after_write=True)

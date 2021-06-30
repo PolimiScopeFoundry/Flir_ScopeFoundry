@@ -23,7 +23,8 @@ class FlirDevice(object):
             self.cam.ExposureAuto = 'Off'
             self.cam.ExposureMode = 'Timed'
             self.cam.GainAuto = 'Off'
-            self.cam.AcquisitionFrameRateAuto = 'Off'            
+            self.cam.AcquisitionFrameRateEnabled = True
+            self.cam.AcquisitionFrameRateAuto = 'Off' 
             self.cam.AutoFunctionAOIsControl = 'Off'
             self.cam.AcquisitionMode = 'Continuous'
             self.cam.ChunkEnable = False
