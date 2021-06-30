@@ -99,6 +99,40 @@ class FlirMeasure(Measurement):
                 self.imv.setLevels( min= self.settings['level_min'],
                                     max= self.settings['level_max'])
             
+    
+    def measure(self):
+        """
+        Set mode to Multiframe, acquire Nframes frames and eventually save them in h5 
+        """
+        
+        self.image_gen.settings['acquisition_mode'] = 'MultiFrame'
+        first_frame_acquired = False
+        frame_num  = self.image_gen.frame_num.val
+        self.image_gen.camera.set_framenum(frame_num)
+        
+        self.image_gen.camera.acq_stop()
+        self.image_gen.camera.acq_start()
+        
+        for frame_idx in range(frame_num):
+            
+            self.frame_index = frame_idx    
+            self.img = self.image_gen.camera.get_nparray()
+                            
+            if self.settings['save_h5']:
+                if not first_frame_acquired:
+                    self.create_h5_file()
+                    first_frame_acquired = True
+                    
+                self.image_h5[frame_idx,:,:] = self.img
+                self.h5file.flush()
+            
+            if self.interrupt_measurement_called:
+                break
+            
+        self.image_gen.camera.acq_stop()
+        
+    
+    
     def run(self):
         """
         Runs when measurement is started. Runs in a separate thread from GUI.
@@ -109,59 +143,24 @@ class FlirMeasure(Measurement):
         
         try:
             
-            self.frame_index = 0
-            
-            if self.image_gen.settings['acquisition_mode'] == 'Continuous':
-            # if self.image_gen.settings.acquisition_mode.val ==' Continuos':    
-            
-                """
-                If mode is Continuos, acquire frames indefinitely. No save in h5 is permormed 
-                """
-                
-                
-                self.image_gen.camera.acq_start() 
-                while not self.interrupt_measurement_called:
+            self.frame_index = -1
+            self.image_gen.settings['acquisition_mode'] = 'Continuous'
+            self.image_gen.camera.acq_start() 
+            while not self.interrupt_measurement_called:
                      
-                    self.img = self.image_gen.camera.get_nparray()
-                    if self.interrupt_measurement_called:
-                        break
+                self.img = self.image_gen.camera.get_nparray()
                 
-                self.image_gen.camera.acq_stop()                   
-            
-            
-            elif self.image_gen.settings['acquisition_mode'] == 'MultiFrame':
-                """
-                If mode is Multiframe, acquire Nframes frames and eventually save them in h5 
-                """
-                first_frame_acquired = False
-                frame_num  = self.image_gen.frame_num.val
-                self.image_gen.camera.set_framenum(frame_num)
-                 
-                self.image_gen.camera.acq_start()
+                if self.interrupt_measurement_called:
+                    break
                 
-                for frame_idx in range(frame_num):
-                    
-                    self.frame_index = frame_idx    
-                    self.img = self.image_gen.camera.get_nparray()
-                                    
-                    if self.settings['save_h5']:
-                        if not first_frame_acquired:
-                            self.create_h5_file()
-                            first_frame_acquired = True
-                            
-                        self.image_h5[frame_idx,:,:] = self.img
-                        self.h5file.flush()
-                    
-                    if self.interrupt_measurement_called:
-                        break
-                    
-                self.image_gen.camera.acq_stop()
-                              
-
+                if self.settings['save_h5']:
+                    "Measure is triggered by save_h5 button"
+                    self.measure()
+                    break
+                
         finally:            
             
             self.image_gen.camera.acq_stop()
-            
             if self.settings['save_h5'] and hasattr(self, 'h5file'):
                 # make sure to close the data file
                 self.h5file.close() 
