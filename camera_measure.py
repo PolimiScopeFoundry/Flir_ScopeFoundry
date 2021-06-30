@@ -104,13 +104,11 @@ class FlirMeasure(Measurement):
         """
         Set mode to Multiframe, acquire Nframes frames and eventually save them in h5 
         """
-        
+        self.image_gen.camera.acq_stop()
         self.image_gen.settings['acquisition_mode'] = 'MultiFrame'
         first_frame_acquired = False
         frame_num  = self.image_gen.frame_num.val
         self.image_gen.camera.set_framenum(frame_num)
-        
-        self.image_gen.camera.acq_stop()
         self.image_gen.camera.acq_start()
         
         for frame_idx in range(frame_num):
@@ -142,10 +140,10 @@ class FlirMeasure(Measurement):
         self.image_gen.read_from_hardware()
         
         try:
-            
             self.frame_index = -1
             self.image_gen.settings['acquisition_mode'] = 'Continuous'
             self.image_gen.camera.acq_start() 
+            
             while not self.interrupt_measurement_called:
                      
                 self.img = self.image_gen.camera.get_nparray()
@@ -154,7 +152,7 @@ class FlirMeasure(Measurement):
                     break
                 
                 if self.settings['save_h5']:
-                    "Measure is triggered by save_h5 button"
+                    # measure is triggered by save_h5 button
                     self.measure()
                     break
                 
